@@ -1,0 +1,32 @@
+version: '3.7'
+services:
+  crawler:
+    image: crawler
+    container_name: crawler
+    build:
+      context: ./crawler
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - 3000:3000
+    network_mode: bridge
+    external_links:
+      - mysql-container
+
+  infoaqui:
+    image: infoaqui
+    container_name: infoaqui
+    build:
+      context: ./infoaqui
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - 80:80
+    links:
+      - crawler
+    environment:
+      - CHOKIDAR_USEPOLLING=true
