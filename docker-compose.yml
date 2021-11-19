@@ -34,3 +34,4 @@ services:
       - crawler
     environment:
       - CHOKIDAR_USEPOLLING=true
+      - URL_API_CONTENT="http://crawler:3000"
