@@ -10,16 +10,13 @@ services:
       - '.:/app'
       - '/app/node_modules'
     ports:
-      - 127.0.0.1:3000:3000
-    # networks:
-    #   - crawler
+      - 3000:3000
     network_mode: bridge
     external_links:
       - mysql-container
     environment:
-      # - DB_URL=mysql-container
+      - DB_URL=mysql-container
       - DB_PASSWD=@dm7815389mm
-      - DB_PASSWD=admin
       - DB_USR=admin
 
   infoaqui:
@@ -33,18 +30,7 @@ services:
       - '/app/node_modules'
     ports:
       - 80:80
-    network_mode: bridge
-    # networks: 
-    #   - frontend
-    #   - crawler
     links:
       - crawler
     environment:
       - CHOKIDAR_USEPOLLING=true
-
-# networks:
-#   # frontend:
-#   # crawler:
-#   default:
-#     external: true
-#     name: bridge 
